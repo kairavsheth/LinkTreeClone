@@ -1,5 +1,4 @@
-from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Literal
 
 from bson import ObjectId
 from pydantic import BaseModel, HttpUrl, Field
@@ -18,23 +17,21 @@ class UserCredentials(BaseModel):
         }
 
 
-class Platform(Enum):
-    DRIBBLE = 'DRIBBLE'
-    GITHUB = 'GITHUB'
-    INSTAGRAM = 'INSTAGRAM'
-    LINKEDIN = 'LINKEDIN'
-    TELEGRAM = 'TELEGRAM'
-    TWITTER = 'TWITTER'
-    WEBSITE = 'WEBSITE'
-    YOUTUBE = 'YOUTUBE'
-    OTHER = 'OTHER'
-
-
-class Link(BaseModel):
-    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
+class LinkCreate(BaseModel):
     url: HttpUrl
-    platform: Platform
+    platform: Literal['DRIBBLE', 'GITHUB', 'INSTAGRAM', 'LINKEDIN', 'TELEGRAM', 'TWITTER', 'WEBSITE', 'YOUTUBE']
     text: str
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {}
+
+
+class Link(LinkCreate):
+    id: ObjectId = Field(default_factory=ObjectId)
+
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
@@ -51,8 +48,18 @@ class UserProfile(BaseModel):
 class UserLinks(BaseModel):
     links: List[Link] = Field(default=[])
 
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {}
 
-class User(UserProfile, UserCredentials, UserLinks):
+
+class UserDisplay(UserProfile, UserLinks):
+    pass
+
+
+class User(UserDisplay, UserCredentials):
     id: ObjectId = Field(default_factory=ObjectId, alias="_id")
 
     class Config:
