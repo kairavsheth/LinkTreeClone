@@ -27,6 +27,6 @@ async def get_current_user(token: HTTPAuthorizationCredentials = Depends(securit
         if user:
             return User(**user)
         else:
-            raise HTTPException(status_code=401, detail=f"Invalid user credentials.")
+            raise HTTPException(status_code=401, detail="Invalid user credentials.")
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid authentication credentials")

@@ -1,8 +1,5 @@
-from fastapi import FastAPI
+# Linktree Backend Clone
 
-from app.routes import router
-
-app = FastAPI(docs_url="/demo", redoc_url="/docs", title="Linktree Backend Clone", version="v0.0.1", description='''
 ### Stack used
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
@@ -16,6 +13,3 @@ app = FastAPI(docs_url="/demo", redoc_url="/docs", title="Linktree Backend Clone
 ## Documentation
 1. Documentation available on `/docs`
 2. Interactive UI for testing is available on `/demo`
-''')
-
-app.include_router(router)
