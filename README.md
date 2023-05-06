@@ -5,6 +5,8 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
+## Live Demo Link
+Deployed on https://linktree-r736emqdaq-el.a.run.app/
 ## Setup
 1. Clone the repository
 2. Rename `.env.sample` file to `.env`
